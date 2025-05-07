@@ -1,7 +1,7 @@
 <h1> SFML Falling Sand </h1>
 
 <p>
-A simulation of sand falling, written in C++ with the SFML Graphics library.
+A simulation of sand falling, written in C++ with the SFML Graphics library. Sand updates are performed using CUDA.
 </p>
 
 <h2>Introduction</h2>
@@ -41,4 +41,3 @@ There is no binary to install, so just set up your SFML workspace as usual and c
 This software is released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3 License</a>.</p>
 <h2>Contact</h2>
 <p>
-If you have any questions or comments, please reach out to me <a href="mailto:leon.rode13@gmail.com">here</a>.

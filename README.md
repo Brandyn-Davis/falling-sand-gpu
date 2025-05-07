@@ -39,5 +39,4 @@ There is no binary to install, so just set up your SFML workspace as usual and c
 <h2>License</h2>
 <p>
 This software is released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3 License</a>.</p>
-<h2>Contact</h2>
 <p>

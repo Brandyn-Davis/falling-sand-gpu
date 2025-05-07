@@ -9,6 +9,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "sand_simulator_gpu_update.h"
+
 class World {
 private:
 	
@@ -21,8 +23,8 @@ private:
 		to the next row, that sand falls down again, and so on, until the sand drops to the ground 
 		all in one frame.
 	*/
-	int privategrid[width][height]; 
-	int grid[width][height];
+	char privategrid[width][height]; 
+	char grid[width][height];
 public:
 	const int sandSize = 5;
 
@@ -35,58 +37,63 @@ public:
 		}
 		
 	}
-	void update() {
-		
 
-		for (int i = 0; i < width - 1; i++) {
-			for (int j = 0; j < height - 1; j++) {
-				if (privategrid[i][j] == 1) {
+    void update() {
+        updateSand(reinterpret_cast<char*>(privategrid), reinterpret_cast<char*>(grid), height, width);
+    }
 
-					
-					/*
-						If the space below is empty, just fall
-					*/
-					if (privategrid[i][j + 1] == 0) {
-						grid[i][j] = 0;
-						grid[i][j + 1] = 1;
-					}
-
-					/*
-						If the space below and left is empty as well as the space below and right,
-						choose randomly between the sides and move there
-					*/
-
-					else if (privategrid[i - 1][j + 1] == 0 && privategrid[i + 1][j + 1] == 0) {
-						bool direction = rand() % 2;
-						if (direction == 0) {
-							// left
-							grid[i][j] = 0;
-							grid[i - 1][j + 1] = 1;
-						}
-						else if (direction == 1) {
-							grid[i][j] = 0;
-							grid[i + 1][j + 1] = 1;
-						}
-					}
-					/*
-						If only below and left is empty, move there.
-					*/
-					else if (privategrid[i - 1][j + 1] == 0) {
-						grid[i][j] = 0;
-						grid[i - 1][j + 1] = 1;
-					}
-					/*
-						If only below and right is empty, move there.
-					*/
-					else if (privategrid[i + 1][j + 1] == 0) {
-						grid[i][j] = 0;
-						grid[i + 1][j + 1] = 1;
-					}
-				}
-			}
-		}
-		
-	}
+//	void update() {
+//		
+//
+//		for (int i = 0; i < width - 1; i++) {
+//			for (int j = 0; j < height - 2; j++) {
+//				if (privategrid[i][j] == 1) {
+//
+//					
+//					/*
+//						If the space below is empty, just fall
+//					*/
+//					if (privategrid[i][j + 1] == 0) {
+//						grid[i][j] = 0;
+//						grid[i][j + 1] = 1;
+//					}
+//
+//					/*
+//						If the space below and left is empty as well as the space below and right,
+//						choose randomly between the sides and move there
+//					*/
+//
+//					else if (privategrid[i - 1][j + 1] == 0 && privategrid[i + 1][j + 1] == 0) {
+//						bool direction = rand() % 2;
+//						if (direction == 0) {
+//							// left
+//							grid[i][j] = 0;
+//							grid[i - 1][j + 1] = 1;
+//						}
+//						else if (direction == 1) {
+//							grid[i][j] = 0;
+//							grid[i + 1][j + 1] = 1;
+//						}
+//					}
+//					/*
+//						If only below and left is empty, move there.
+//					*/
+//					else if (privategrid[i - 1][j + 1] == 0) {
+//						grid[i][j] = 0;
+//						grid[i - 1][j + 1] = 1;
+//					}
+//					/*
+//						If only below and right is empty, move there.
+//					*/
+//					else if (privategrid[i + 1][j + 1] == 0) {
+//						grid[i][j] = 0;
+//						grid[i + 1][j + 1] = 1;
+//					}
+//				}
+//			}
+//		}
+//		
+//	}
 
 
 	void draw(sf::RenderWindow &window) {
